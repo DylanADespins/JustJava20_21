@@ -22,10 +22,23 @@ public class MainActivity extends AppCompatActivity {
         display(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
     }
+}
+    /**
+     * This method is called when the + button is clicked.
+     */
+    public void increment (View view) {
+        int quantity = 1;
+        display(quantity);
+        
+    }
+    /**
+     * This method is called when the - button is clicked.
+     */
+    public void decrement (View view) {
+        int quantity = 1;
+        display(quantity);
 
-
-
-
+    }
     /**
      * This method displays the given quantity value on the screen.
      */
