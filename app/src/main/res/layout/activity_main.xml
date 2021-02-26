@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:textColor="#000000"
-        android:text="$0"
+        android:text="Total: Free\nThank you!"
         />
     <Button
         android:id="@+id/order_button"
