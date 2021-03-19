@@ -7,12 +7,28 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/quantity_title"
+        android:textAllCaps="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toppings"
+        android:layout_marginBottom="16dp"
+        />
+
+    <CheckBox
+        android:text="Whipped Cream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:textSize="16sp"
+        />
+
+    <TextView
         android:textAllCaps="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Quantity"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         />
 
     <LinearLayout
