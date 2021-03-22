@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import java.text.NumberFormat;
 /**
@@ -23,11 +24,23 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void submitOrder(View view) {
+
+        EditText nameField = (EditText)findViewById(R.id.name_field);
+        String name = nameField.getText().toString();
+
+        // Looks for users input on Whipped Cream Topping
         CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+        // Looks for users input on Chocolate Topping
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+
+        Log.v("MainActivity", "Name: " + name);
         Log.v("MainActivity", "Has whipped cream: " + hasWhippedCream);
+        Log.v("MainActivity", "Has Chocolate: " + hasChocolate );
+
         int price = calculatePrice() ;
-        String priceMessage = createOrderSummary(price, hasWhippedCream);
+        String priceMessage = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
         displayMessage(priceMessage);
     }
     /**
@@ -43,13 +56,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Create Summary of the order
      *
+     * @param name of the user
      * @param price of the order
      * @param addWhippedCream is whether or not the user wants whipped cream topping
+     * @param addChocolate is whether or not the user wants Chocolate topping
      * @return text summary
      */
-    private String createOrderSummary(int price, boolean addWhippedCream) {
-        String priceMessage = "Name: Kaptain Kunal";
+    private String createOrderSummary(String name,int price, boolean addWhippedCream, boolean addChocolate) {
+        String priceMessage = "Name: " + name;
         priceMessage += "\nAdd whipped cream? " + addWhippedCream ;
+        priceMessage += "\nAdd Chocolate? " + addChocolate ;
         priceMessage += "\nQuantity: " + quantity ;
         priceMessage += "\nTotal: $" + price;
         priceMessage +="\nThank you!";
