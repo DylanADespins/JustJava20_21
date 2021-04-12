@@ -2,14 +2,20 @@ package com.example.justjava20_21;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.NumberFormat;
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
-    int quantity = 0;
+    int quantity = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +26,25 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void submitOrder(View view) {
-        int price = calculatePrice() ;
-        String priceMessage = createOrderSummary(price);
+
+        // Looks for users input through text asking what their name is
+        EditText nameField = (EditText)findViewById(R.id.name_field);
+        String name = nameField.getText().toString();
+
+        // Looks for users input on Whipped Cream Topping
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+
+        // Looks for users input on Chocolate Topping
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+
+        Log.v("MainActivity", "Name: " + name);
+        Log.v("MainActivity", "Has whipped cream: " + hasWhippedCream);
+        Log.v("MainActivity", "Has Chocolate: " + hasChocolate );
+
+        int basePrice = calculatePrice(hasWhippedCream, hasChocolate) ;
+        String priceMessage = createOrderSummary(name, basePrice, hasWhippedCream, hasChocolate);
         displayMessage(priceMessage);
     }
     /**
@@ -29,28 +52,52 @@ public class MainActivity extends AppCompatActivity {
      *
      * @return total price
      */
-    private int calculatePrice() {
-        int price = quantity * 5;
-        return price;
+    private int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
+        // Price of 1 Cup of Coffee
+        int basePrice = 5;
+
+        // Add Price for Whipped Cream Topping
+        if (addWhippedCream) {
+            basePrice = basePrice + 1;
+        }
+
+        // Add Price for Chocolate Topping
+        if (addChocolate) {
+            basePrice = basePrice + 2;
+        }
+
+        // Calculates the total order price based on multiplying the quantity
+        return quantity * basePrice;
     }
 
     /**
      * Create Summary of the order
      *
-     * @param price of the order
+     * @param name of the user
+     * @param basePrice of the order
+     * @param addWhippedCream is whether or not the user wants whipped cream topping
+     * @param addChocolate is whether or not the user wants Chocolate topping
      * @return text summary
      */
-    private String createOrderSummary(int price) {
-        String priceMessage = "Name: Kaptain Kunal";
-        priceMessage += "\nQuantity: " + quantity ;
-        priceMessage += "\nTotal: $" + price;
-        priceMessage +="\nThank you!";
+    private String createOrderSummary(String name,int basePrice, boolean addWhippedCream, boolean addChocolate) {
+        String priceMessage = getString(R.string.order_summary_name, name);
+        priceMessage += "\n" + getString(R.string.order_summary_whipped_cream, addWhippedCream);
+        priceMessage += "\n" + getString(R.string.order_summary_chocolate, addChocolate);
+        priceMessage += "\n" + getString(R.string.quantity) + quantity;
+        priceMessage += "\n" + getString(R.string.order_summary_price, calculatePrice(addWhippedCream, addChocolate)) ;
+        priceMessage += "\n" + getString(R.string.thank_you);
         return priceMessage;
     }
     /**
      * This method is called when the + button is clicked.
      */
     public void increment (View view) {
+        if(quantity == 100){
+            // Show an error message as a toast
+            Toast.makeText(this, "You cannot have more than 100 coffees", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return;
+        }
         quantity = quantity + 1;
         displayQuantity(quantity);
 
@@ -59,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the - button is clicked.
      */
     public void decrement (View view) {
+        if (quantity == 1){
+            // Show an error message as a toast
+            Toast.makeText(this, "You cannot less than 1 coffees", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return;
+        }
         quantity = quantity - 1;
         displayQuantity(quantity);
 
