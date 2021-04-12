@@ -15,7 +15,7 @@ import java.text.NumberFormat;
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
-    int quantity = 1;
+    int quantity = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
      * @return text summary
      */
     private String createOrderSummary(String name,int basePrice, boolean addWhippedCream, boolean addChocolate) {
-        String priceMessage = "Name: " + name;
-        priceMessage += "\nAdd whipped cream? " + addWhippedCream ;
-        priceMessage += "\nAdd Chocolate? " + addChocolate ;
-        priceMessage += "\nQuantity: " + quantity ;
-        priceMessage += "\nTotal: $" + basePrice;
-        priceMessage +="\nThank you!";
+        String priceMessage = getString(R.string.order_summary_name, name);
+        priceMessage += "\n" + getString(R.string.order_summary_whipped_cream, addWhippedCream);
+        priceMessage += "\n" + getString(R.string.order_summary_chocolate, addChocolate);
+        priceMessage += "\n" + getString(R.string.quantity) + quantity;
+        priceMessage += "\n" + getString(R.string.order_summary_price, calculatePrice(addWhippedCream, addChocolate)) ;
+        priceMessage += "\n" + getString(R.string.thank_you);
         return priceMessage;
     }
     /**

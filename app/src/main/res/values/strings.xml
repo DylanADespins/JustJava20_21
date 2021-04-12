@@ -1,3 +1,37 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">JustJava20_21</string>
+
+    <!-- Header text for the list of toppings [CHAR LIMIT=20] -->
+    <string name="toppings">Toppings</string>
+    <!-- Thank you message for the order summary. [CHAR LIMIT=NONE] -->
+    <string name="thank_you">Thank you!</string>
+    <!--
+    Name for the order summary. It will be shown in the format of "Name: Amy" where Any is the
+    user's name. [CHAR LIMIT=NONE]
+    -->
+    <string name="order_summary_name">Name: <xliff:g id="name" example ="Amy">%s</xliff:g></string>
+
+    <string name="name">Name</string>
+
+    <string name="whipped_cream">Whipped Cream</string>
+
+    <string name="chocolate">Chocolate </string>
+
+    <string name="quantity">Quantity: </string>
+
+    <string name="initial_quantity_value"> 2</string>
+
+    <string name="order_summary">Order Summary</string>
+
+    <string name="default_total_thank_you">Total:$0 \nThank you!</string>
+
+    <string name="order">Order</string>
+
+    <string name="order_summary_whipped_cream">Add whipped cream? <xliff:g id="addWhippedCream" example="true">%b</xliff:g> </string>
+
+    <string name="order_summary_quantity">Quantity: <xliff:g id="Quantity " example="2"> %d</xliff:g> </string>
+
+    <string name="order_summary_chocolate">Add Chocolate? <xliff:g id="addChocolate" example="true">%b</xliff:g> </string>
+
+    <string name="order_summary_price">Total: $<xliff:g id="price" example="$0">%d</xliff:g></string>
 </resources>
